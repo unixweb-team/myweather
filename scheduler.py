@@ -9,9 +9,9 @@ import MySQLdb as mdb
 import datetime
 from sampledata import *
 
-databaseUsername="admin"
-databasePassword="admin@123"
-databaseName="wordpressdb" #do not change unless you named the Wordpress database with some other name
+databaseUsername="XXX"
+databasePassword="XXXX"
+databaseName="XXXX" #do not change unless you named the Wordpress database with some other name
 databaseHost="localhost"
 
 
