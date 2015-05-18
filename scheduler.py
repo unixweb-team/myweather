@@ -94,7 +94,7 @@ def auto_execute():
      while(status!="true"):
         #print status,datetime.datetime.now().time()
         status=readInfo()
-        time.sleep(60)
+        time.sleep(300)
      return
 
 while True:
