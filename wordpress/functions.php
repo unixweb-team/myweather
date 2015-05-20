@@ -95,15 +95,30 @@ function visualization_line_chart_shortcode($atts, $content = null)
 	$displayMeasurement     = esc_sql($options[scale]);
 	
 		//check for all types of temperature
-	if (strcasecmp($display, "Temperature") == 0 OR strcasecmp($display, "Temperatures") == 0 || strcasecmp($display, "Temp") == 0 || strcasecmp($display, "Temps") == 0)
+	if (strcasecmp($display, "Temperature_1") == 0 OR strcasecmp($display, "Temperatures_1") == 0 || strcasecmp($display, "Temp_1") == 0 || strcasecmp($display, "Temps_1") == 0)
 	{
 		$display = "hourMeasured, temperature";
-		$a=1;
+		$a="Temp1";
+	}
+	else if (strcasecmp($display, "Temperature_2") == 0 OR strcasecmp($display, "Temperatures_2") == 0 || strcasecmp($display, "Temp_2") == 0 || strcasecmp($display, "Temps_2") == 0)
+	{
+		$display = "hourMeasured, temperature";
+		$a="Temp2";
+	}
+	else if (strcasecmp($display, "Temperature_3") == 0 OR strcasecmp($display, "Temperatures_3") == 0 || strcasecmp($display, "Temp_3") == 0 || strcasecmp($display, "Temps_3") == 0)
+	{
+		$display = "hourMeasured, temperature";
+		$a="Temp3";
+	}
+	else if (strcasecmp($display, "Temperature_4") == 0 OR strcasecmp($display, "Temperatures_4") == 0 || strcasecmp($display, "Temp_4") == 0 || strcasecmp($display, "Temps_4") == 0)
+	{
+		$display = "hourMeasured, temperature";
+		$a="Temp4";
 	}
 	else if (strcasecmp($display, "Humidity") == 0 OR strcasecmp($display, "Hum") == 0)
 	{
 		$display = "hourMeasured, humidity";
-		$a=2;
+		$a="Humidity";
 	}
 	else
 		$display = "*";
@@ -112,11 +127,28 @@ function visualization_line_chart_shortcode($atts, $content = null)
 	else
 		$displayMeasurement = "F";
 	
-	if($a==1){
+	if($a=="Temp1"){
+		
 		$resultSet = $wpdb->get_results("SELECT hourMeasured,temperature_1 FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
+		
 	}
-	elseif($a==2){
-	
+	elseif($a=="Temp2"){
+		
+		$resultSet2 = $wpdb->get_results("SELECT hourMeasured,temperature_2 FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
+		
+	}
+	elseif($a=="Temp3"){
+		
+		$resultSet3 = $wpdb->get_results("SELECT hourMeasured,temperature_3 FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
+		
+	}
+	elseif($a=="Temp4"){
+		
+		$resultSet3 = $wpdb->get_results("SELECT hourMeasured,temperature_4 FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
+		
+	}
+	elseif($a=="Humidity"){
+		
 		$resultSet = $wpdb->get_results("SELECT hourMeasured,humidity FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
 	}
 	else
@@ -204,6 +236,9 @@ function visualization_line_chart_shortcode($atts, $content = null)
 		}
 	}
 	
+	
+	if($a=="Temp1")
+	{
 	foreach ($resultSet as $row) {
 			$hourMeasured = $row['hourMeasured'];
 		if (strcmp($displayMeasurement, "C") == 0)
@@ -218,7 +253,58 @@ function visualization_line_chart_shortcode($atts, $content = null)
 			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $temperature . "," . $row['humidity'] . "],";
 			
 	}
-	
+	}
+	else if($a=="Temp2")
+	{
+	foreach ($resultSet2 as $row) {
+			$hourMeasured = $row['hourMeasured'];
+		if (strcmp($displayMeasurement, "C") == 0)
+			$temperature = $row['temperature_2'];
+		
+		else
+			$temperature = $row['temperature_2'] * (9 / 5) + 32;
+		
+		if (strpos($display, "humidity") != 0) //for displaying humidity only
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $row['humidity'] . "],";
+		else
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $temperature . "," . $row['humidity'] . "],";
+			
+	}
+	}
+	else if($a=="Temp3")
+	{
+	foreach ($resultSet3 as $row) {
+			$hourMeasured = $row['hourMeasured'];
+		if (strcmp($displayMeasurement, "C") == 0)
+			$temperature = $row['temperature_3'];
+		
+		else
+			$temperature = $row['temperature_3'] * (9 / 5) + 32;
+		
+		if (strpos($display, "humidity") != 0) //for displaying humidity only
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $row['humidity'] . "],";
+		else
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $temperature . "," . $row['humidity'] . "],";
+			
+	}
+	}
+	else if($a=="Temp4")
+	{
+	foreach ($resultSet3 as $row) {
+			$hourMeasured = $row['hourMeasured'];
+		if (strcmp($displayMeasurement, "C") == 0)
+			$temperature = $row['temperature_4'];
+		
+		else
+			$temperature = $row['temperature_4'] * (9 / 5) + 32;
+		
+		if (strpos($display, "humidity") != 0) //for displaying humidity only
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $row['humidity'] . "],";
+		else
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $temperature . "," . $row['humidity'] . "],";
+			
+	}
+	}
 	//Populate the data
 	$graph_draw_js .= 'var data = google.visualization.arrayToDataTable([';
 	$graph_draw_js .= str_replace(array(
