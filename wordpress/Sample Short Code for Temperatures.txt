@@ -1,0 +1,31 @@
+
+
+[line_chart title="My weather station temperatures 1" day="Today" display="Temperatures_1" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+
+
+
+[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_2" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+
+
+
+[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_3" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+
+
+
+[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_4" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+
+
+
+[line_chart title="My weather station temperatures 1" day="Yesterday" display="Temperatures_1" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+
+
+
+[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_2" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+
+
+
+[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_3" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+
+
+
+[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_4" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
