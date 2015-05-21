@@ -61,7 +61,6 @@ def saveToDatabase(temp1, temp2, temp3, temp4, humidity, pressure, sea_pressure,
     return "false"
 
 
-
 def readInfo():
     #print "ReadInfo Hit"
     temperatureSaved="false"
@@ -78,3 +77,6 @@ def readInfo():
          return saveToDatabase(temp1, temp2, temp3, temp4, humidity, pressure, sea_pressure, altitude)
 
 status=readInfo()
+
+
+
