@@ -94,7 +94,8 @@ function visualization_line_chart_shortcode($atts, $content = null)
 	$display                = esc_sql($options[display]); //do we show only temp, only humidity or both?
 	$displayMeasurement     = esc_sql($options[scale]);
 	
-		//check for all types of temperature
+	
+	//check for all types of temperature
 	if (strcasecmp($display, "Temperature_1") == 0 OR strcasecmp($display, "Temperatures_1") == 0 || strcasecmp($display, "Temp_1") == 0 || strcasecmp($display, "Temps_1") == 0)
 	{
 		$display = "hourMeasured, temperature";
@@ -120,13 +121,27 @@ function visualization_line_chart_shortcode($atts, $content = null)
 		$display = "hourMeasured, humidity";
 		$a="Humidity";
 	}
+	else if (strcasecmp($display, "Pressure Altitude") == 0 OR strcasecmp($display, "Pressure_Altitude") == 0 OR strcasecmp($display, "pressure altitude") == 0 OR strcasecmp($display, "pressure_altitude") == 0)
+	{
+		$display = "hourMeasured,pressure,altitude";
+		$a="Pressure Altitude";
+	}
+	else if (strcasecmp($display, "Sea_Pressure Altitude") == 0 OR strcasecmp($display, "Sea_Pressure_Altitude") == 0 OR strcasecmp($display, "sea_pressure altitude") == 0 OR strcasecmp($display, "sea_pressure_altitude") == 0)
+	{
+		$display = "hourMeasured,pressure-sea,altitude";
+		$a="Sea_Pressure Altitude";
+	}
 	else
 		$display = "*";
+	
 	if (strcasecmp($displayMeasurement, "Celsius") == 0 || strcasecmp($displayMeasurement, "C") == 0 || strcasecmp($displayMeasurement, "Celzius") == 0)
 		$displayMeasurement = "C";
+	else if(strcasecmp($displayMeasurement, "hPa") == 0 || strcasecmp($displayMeasurement, "HPA") == 0 || strcasecmp($displayMeasurement, "hpa") == 0)
+		$displayMeasurement = "hPa";
 	else
 		$displayMeasurement = "F";
-	
+		
+		
 	if($a=="Temp1"){
 		
 		$resultSet = $wpdb->get_results("SELECT hourMeasured,temperature_1 FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
@@ -147,10 +162,17 @@ function visualization_line_chart_shortcode($atts, $content = null)
 		$resultSet3 = $wpdb->get_results("SELECT hourMeasured,temperature_4 FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
 		
 	}
+	elseif($a=="Pressure Altitude"){
+			$resultSet4 = $wpdb->get_results("SELECT hourMeasured,pressure,altitude FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
+	}
+	elseif($a=="Sea_Pressure Altitude"){
+		$resultSet4 = $wpdb->get_results("SELECT hourMeasured,pressure_sea,altitude FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
+	}
 	elseif($a=="Humidity"){
 		
-		$resultSet = $wpdb->get_results("SELECT hourMeasured,humidity FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
+		$resultSet5 = $wpdb->get_results("SELECT hourMeasured,humidity FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
 	}
+	
 	else
 	{
 		$resultSet = $wpdb->get_results("SELECT * FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
@@ -234,9 +256,16 @@ function visualization_line_chart_shortcode($atts, $content = null)
 		else if (strpos($display, "humidity") != 0) {
 			$content = "['Time','Humidity [%]'],";
 		}
+		
+		// displaying Pressure with Altitude
+		else if (strpos($display, "pressure") != 0) {
+			$content = "['Time','Pressure [hPa]','Altitude [m]'],";
+		}
+		// displaying Sea_Pressure with Altitude
+		else if (strpos($display, "sea_pressure") != 0) {
+			$content = "['Time','Sea_Pressure [hPa]','Altitude [m]'],";
+		}
 	}
-	
-	
 	if($a=="Temp1")
 	{
 	foreach ($resultSet as $row) {
@@ -303,6 +332,46 @@ function visualization_line_chart_shortcode($atts, $content = null)
 		else
 			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $temperature . "," . $row['humidity'] . "],";
 			
+	}
+	}
+	else if($a=="Pressure Altitude")
+	{
+	foreach ($resultSet4 as $row) {
+		$hourMeasured = $row['hourMeasured'];
+		if (strcmp($displayMeasurement, "hPa") == 0)
+			$pressure = $row['pressure'];
+		
+		else
+			$pressure = $row['pressure'];
+		
+		if (strpos($display, "humidity") != 0) //for displaying humidity only
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $row['humidity'] . "],";
+		else
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $pressure . "," . $row['altitude'] . "],";
+			
+	}
+	}
+	else if($a=="Sea_Pressure Altitude")
+	{
+	foreach ($resultSet4 as $row) {
+		$hourMeasured = $row['hourMeasured'];
+		if (strcmp($displayMeasurement, "hPa") == 0)
+			$sea_pressure = $row['pressure_sea'];
+		
+		else
+			$sea_pressure = $row['pressure_sea'];
+		
+		if (strpos($display, "humidity") != 0) //for displaying humidity only
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $row['humidity'] . "],";
+		else
+			$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $sea_pressure . "," . $row['altitude'] . "],";
+			
+	}
+	}
+	else if($a=="Humidity")
+	{
+	foreach ($resultSet5 as $row) {
+		$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $row['humidity'] . "],";
 	}
 	}
 	//Populate the data
