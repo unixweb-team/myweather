@@ -76,27 +76,7 @@ def readInfo():
          #temperatureSaved="true"
          return saveToDatabase(temp1, temp2, temp3, temp4, humidity, pressure, sea_pressure, altitude)
 
-def search_attr(val, source):
-    #print "Search Hit"
-    #print val
-    #print source
-    output = subprocess.check_output([source]);
-    matches = re.search(("%s =\s+([-]?[0-9.]+)" % val), output)
-    if (not matches):
-        print "searching for %s"% (val)
-        time.sleep(3)
-        search_attr(val, source)
-    return float(matches.group(1))
+status=readInfo()
 
 
-def auto_execute():
-     status="false"
-     while(status!="true"):
-        #print status,datetime.datetime.now().time()
-        status=readInfo()
-        time.sleep(300)
-     return
-
-while True:
-    auto_execute()
 
