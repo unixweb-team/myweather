@@ -9,10 +9,10 @@ import MySQLdb as mdb
 import datetime
 from weather import *
 
-databaseUsername="root"
-databasePassword="root"
-databaseName="wordpress1" #do not change unless you named the Wordpress database with some other name
-databaseHost="192.168.10.40"
+databaseUsername="XXXX"
+databasePassword="XXXX"
+databaseName="XXXX" #do not change unless you named the Wordpress database with some other name
+databaseHost="XXXX"
 
 
 #check if table is created or if we need to create one
