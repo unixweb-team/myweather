@@ -12,3 +12,6 @@ CREATE TABLE IF NOT EXISTS `temperatures` (
   `altitude` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+ALTER TABLE `temperatures` CHANGE `pressure-sea` `pressure_sea` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
