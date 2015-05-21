@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `temperatures` (
   `temperature_3` double NOT NULL,
   `temperature_4` double NOT NULL,
   `pressure` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `pressure-sea` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pressure_sea` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `humidity` varchar(20) NOT NULL,
   `altitude` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
