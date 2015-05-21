@@ -200,7 +200,5 @@ def readInfo():
          sea_pressure  =  Sea_pressure
          #temperatureSaved="true"
          return saveToDatabase(temp1, temp2, temp3, temp4, humidity, pressure, sea_pressure, altitude)
-=======
->>>>>>> origin/development
 
 status=readInfo()
