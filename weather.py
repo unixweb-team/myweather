@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 # Can enable debug output by uncommenting:
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
@@ -41,7 +39,7 @@ sensor4 = ""
 # Sensor1 = BMP085
 # Output= Temp1
 def getTemp1():
-     temperature1 = format(sensor1.read_temperature())
+     temperature1 = round(sensor1.read_temperature())
      if(temperature1==0):
          return 0
      else:
@@ -59,7 +57,7 @@ def getTemp2():
                 tempfile.close()
                 tempdata=thetext.split("\n")[1].split(" ")[9]
                 temperature2=float(tempdata[2:])
-                temperature2=temperature2/1000
+                temperature2=round(temperature2/1000)
             else:
                 temperature2=0
             if(temperature2==0):
@@ -79,7 +77,7 @@ def getTemp3():
                 tempfile.close()
                 tempdata=thetext.split("\n")[1].split(" ")[9]
                 temperature3=float(tempdata[2:])
-                temperature3=temperature3/1000
+                temperature3=round(temperature3/1000)
             else:
                 temperature3=0
             if(temperature3==0):
@@ -99,7 +97,7 @@ def getTemp4():
                 tempfile.close()
                 tempdata=thetext.split("\n")[1].split(" ")[9]
                 temperature4=float(tempdata[2:])
-                temperature4=temperature4/1000
+                temperature4=(temperature4/1000)
             else:
                 temperature4=0
             if(temperature4==0):
@@ -112,7 +110,7 @@ def getTemp4():
 # Output = Pressure
 
 def getPressure():
-    pressure=format(sensor1.read_pressure()/100)
+    pressure=int(round((sensor1.read_pressure()/100)))
     if(pressure==0):
         return 0
     else:
@@ -123,7 +121,7 @@ def getPressure():
 # Output = Sea_Pressure
 
 def getSeaPressure():
-    sea_pressure = format(sensor1.read_sealevel_pressure()/100)
+    sea_pressure = int(round((sensor1.read_sealevel_pressure()/100)))
     if(sea_pressure==0):
         return 0
     else:
@@ -134,7 +132,7 @@ def getSeaPressure():
 # Output = Altitude
 
 def getAltitude():
-    altitude =  format(sensor1.read_altitude())
+    altitude =  int(round((sensor1.read_altitude())))
     if(altitude==0):
         return 0
     else:
@@ -167,3 +165,4 @@ Sea_pressure=getSeaPressure()
 Altitude =getAltitude()
 
 Humidity=getHumidity()
+
