@@ -1,33 +1,38 @@
 
 
-[line_chart title="My weather station temperatures 1" day="Today" display="Temperatures_1" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My weather station temperatures 1" day="Today" display="Temperatures_1" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
-[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_2" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_2" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
-[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_3" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_3" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
-[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_4" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My weather station temperatures 2" day="Today" display="Temperatures_4" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
 [line_chart title="My weather station Pressure with Altitude " day="Today" display="Pressure Altitude" scale="hPa" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
 [line_chart title="My weather station Sea Level Pressure with Altitude " day="Today" display="Sea_Pressure Altitude" scale="hPa" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
-[line_chart title="My Weather station Humidity" day="Today" display="Humidity" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My Weather station Humidity" day="Today" display="Humidity" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
+
+[line_chart title="My Weather station Pressure" day="Today" display="Pressure" scale="hPa" v_title="hPa" h_title="Time" width="600px" height="400px"]
 
 
 
 
-[line_chart title="My weather station temperatures 1" day="Yesterday" display="Temperatures_1" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My weather station temperatures 1" day="Yesterday" display="Temperatures_1" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
-[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_2" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_2" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
-[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_3" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_3" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
-[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_4" scale="Celsius" v_title="Temperatures" width="600px" height="400px" ]
+[line_chart title="My weather station temperatures 2" day="Yesterday" display="Temperatures_4" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
 [line_chart title="My weather station Pressure Altitude " day="Yesterday" display="Pressure Altitude" scale="hPa" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
 [line_chart title="My weather station Sea Level Pressure Altitude " day="Yesterday" display="Sea_Pressure Altitude" scale="hPa" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
 
-[line_chart title="My weather station Sea Level Pressure Altitude " day="Yesterday" display="Sea_Pressure Altitude" scale="hPa" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
+[line_chart title="My Weather station Humidity" day="Yesterday" display="Humidity" scale="Celsius" v_title="Temperatures" h_title="Time" width="600px" height="400px" ]
+
+[line_chart title="My Weather station Pressure" day="Yesterday" display="Pressure" scale="hPa" v_title="hPa" h_title="Time" width="600px" height="400px"]
+
 

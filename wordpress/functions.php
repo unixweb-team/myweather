@@ -98,12 +98,12 @@ function visualization_line_chart_shortcode($atts, $content = null)
 	//check for all types of temperature
 	if (strcasecmp($display, "Temperature_1") == 0 OR strcasecmp($display, "Temperatures_1") == 0 || strcasecmp($display, "Temp_1") == 0 || strcasecmp($display, "Temps_1") == 0)
 	{
-		$display = "hourMeasured, temperature";
+		$display = "hourMeasured,temperature";
 		$a="Temp1";
 	}
 	else if (strcasecmp($display, "Temperature_2") == 0 OR strcasecmp($display, "Temperatures_2") == 0 || strcasecmp($display, "Temp_2") == 0 || strcasecmp($display, "Temps_2") == 0)
 	{
-		$display = "hourMeasured, temperature";
+		$display = "hourMeasured,temperature";
 		$a="Temp2";
 	}
 	else if (strcasecmp($display, "Temperature_3") == 0 OR strcasecmp($display, "Temperatures_3") == 0 || strcasecmp($display, "Temp_3") == 0 || strcasecmp($display, "Temps_3") == 0)
@@ -113,12 +113,12 @@ function visualization_line_chart_shortcode($atts, $content = null)
 	}
 	else if (strcasecmp($display, "Temperature_4") == 0 OR strcasecmp($display, "Temperatures_4") == 0 || strcasecmp($display, "Temp_4") == 0 || strcasecmp($display, "Temps_4") == 0)
 	{
-		$display = "hourMeasured, temperature";
+		$display = "hourMeasured,temperature";
 		$a="Temp4";
 	}
 	else if (strcasecmp($display, "Humidity") == 0 OR strcasecmp($display, "Hum") == 0)
 	{
-		$display = "hourMeasured, humidity";
+		$display = "hourMeasured,humidity";
 		$a="Humidity";
 	}
 	else if (strcasecmp($display, "Pressure Altitude") == 0 OR strcasecmp($display, "Pressure_Altitude") == 0 OR strcasecmp($display, "pressure altitude") == 0 OR strcasecmp($display, "pressure_altitude") == 0)
@@ -130,6 +130,11 @@ function visualization_line_chart_shortcode($atts, $content = null)
 	{
 		$display = "hourMeasured,pressure-sea,altitude";
 		$a="Sea_Pressure Altitude";
+	}
+	else if (strcasecmp($display, "Pressure") == 0 OR strcasecmp($display, "pressure") == 0 )
+	{
+		$display = "hourMeasured,pressure";
+		$a="Pressure";
 	}
 	else
 		$display = "*";
@@ -172,7 +177,10 @@ function visualization_line_chart_shortcode($atts, $content = null)
 		
 		$resultSet5 = $wpdb->get_results("SELECT hourMeasured,humidity FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
 	}
-	
+	elseif($a=="Pressure"){
+		
+		$resultSet6 = $wpdb->get_results("SELECT hourMeasured,pressure FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
+	}
 	else
 	{
 		$resultSet = $wpdb->get_results("SELECT * FROM temperatures WHERE dateMeasured='" . $dateChosen . "'", ARRAY_A);
@@ -253,16 +261,21 @@ function visualization_line_chart_shortcode($atts, $content = null)
 				$content = "['Time','Temperature [C]'],";
 		}
 		//displaying only HUMIDITY
-		else if (strpos($display, "humidity") != 0) {
+		else if (strcasecmp($display, "hourMeasured,humidity") == 0) {
 			$content = "['Time','Humidity [%]'],";
 		}
 		
+		//displaying only Pressure
+		else if (strcasecmp($display, "hourMeasured,pressure") == 0) {
+			$content = "['Time','Pressure [hPa]'],";
+		}
+				
 		// displaying Pressure with Altitude
-		else if (strpos($display, "pressure") != 0) {
+		else if (strcasecmp($display, "hourMeasured,pressure,altitude") == 0) {
 			$content = "['Time','Pressure [hPa]','Altitude [m]'],";
 		}
 		// displaying Sea_Pressure with Altitude
-		else if (strpos($display, "sea_pressure") != 0) {
+		else if (strpos($display, "hourMeasured,pressure-sea,altitude") == 0) {
 			$content = "['Time','Sea_Pressure [hPa]','Altitude [m]'],";
 		}
 	}
@@ -371,7 +384,15 @@ function visualization_line_chart_shortcode($atts, $content = null)
 	else if($a=="Humidity")
 	{
 	foreach ($resultSet5 as $row) {
+		$hourMeasured = $row['hourMeasured'];
 		$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $row['humidity'] . "],";
+	}
+	}
+	else if($a=="Pressure")
+	{
+		foreach ($resultSet6 as $row) {
+		$hourMeasured = $row['hourMeasured'];	
+		$content .= "['" . gmdate("H:i", ($hourMeasured * 60)) . "'," . $row['pressure'] . "],";
 	}
 	}
 	//Populate the data
